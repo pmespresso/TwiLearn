@@ -16,8 +16,8 @@ def hello_monkey():
     message = request.values.get('Body', None)
     message_list = message.split(" ")
 
-    action = message_list[0]
-    value = message_list[1:]
+    # action = message_list[0]
+    # value = message_list[1:]
  
  	# if action == "Define":
  	# 	define(value)
@@ -26,7 +26,8 @@ def hello_monkey():
  	# 	resp.message("fuck you")
 
     resp = twilio.twiml.Response()
-    resp.message("The definition of " + value + "is " + "fuck off")
+    resp.message(message_list)
+    # resp.message("The definition of " + value + "is " + "fuck off")
  
     return str(resp)
 
