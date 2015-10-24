@@ -11,7 +11,7 @@ callers = {
     "+15109902644": "YJ",
 }
  
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/", methods=['POST'])
 def hello_monkey():
     """Respond and greet the caller by name."""
  
