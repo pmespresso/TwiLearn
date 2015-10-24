@@ -62,7 +62,7 @@ def test():
 	# 	resp.message("Google it you lazy fuck " + WikiLookup(value))
 
 def mWebLookup(s):
-	from lxml import etree
+	#from lxml import etree
 	import requests
 	import sys
 	import re
