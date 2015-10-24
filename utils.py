@@ -3,7 +3,7 @@ import requests
 import sys
 import re
  
-def MWebLookup(s):
+def mWebLookup(s):
 	page = requests.get('http://www.merriam-webster.com/dictionary/' + s)
 	text = page.text.encode('ascii', 'ignore').decode('ascii')
 	a = text.find('ssens')
@@ -18,7 +18,7 @@ def MWebLookup(s):
 	else:
 		return text
 
-def WikiLookup(s):
+def wikiLookup(s):
 	page = requests.get('https://en.wikipedia.org/wiki/'+s)
 	text = page.text.encode('ascii', 'ignore').decode('ascii')
 	a = text.find('<p>')

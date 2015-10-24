@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect
 import twilio.twiml
-from utils import MWebLookup, WikiLookup
+from utils import mWebLookup, wikiLookup
 
 app = Flask(__name__)
 
@@ -14,7 +14,7 @@ def hello_monkey():
 
 	resp = twilio.twiml.Response()
 	if action.upper() == "DEFINE":
-		definition = MWebLookup(value)
+		definition = mWebLookup(value)
 		resp.message("The definition of " + value + "is " + definition)
 	# elif action.upper() == "SOLVE":
 	# 	resp.message("Solution is simple m8: " + value)
