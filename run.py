@@ -63,6 +63,11 @@ if __name__ == "__main__":
 
 @app.route("/define", methods=['GET'])
 def mWebLookup(s):
+	from lxml import etree
+	import requests
+	import sys
+	import re
+	
 	page = requests.get('http://www.merriam-webster.com/dictionary/' + s)
 	text = page.text.encode('ascii', 'ignore').decode('ascii')
 	a = text.find('ssens')
