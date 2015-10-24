@@ -1,5 +1,10 @@
 from flask import Flask, request, redirect
 import twilio.twiml
+
+from lxml import etree
+import requests
+import sys
+import re
  
 app = Flask(__name__)
  
@@ -22,7 +27,8 @@ def hello_monkey():
     value = " ".join(message_list[1:])
 
     if action.upper()=="DEFINE":
-    	result = redirect("https://stormy-oasis-6293.herokuapp.com/define")
+    	# result = redirect("https://stormy-oasis-6293.herokuapp.com/define")
+    	result = "You asked to: " + action + "on " + value
  
     resp = twilio.twiml.Response()
     resp.message(result)
