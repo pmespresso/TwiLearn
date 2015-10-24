@@ -23,8 +23,8 @@ def hello_monkey():
 		resp.message("The definition of " + value + "is " + definition)
 	# elif action.upper() == "SOLVE":
 	# 	resp.message("Solution is simple m8: " + value)
-	elif action.upper() == "SEARCH":
-		resp.message("Google it you lazy fuck " + WikiLookup(value))
+	# elif action.upper() == "SEARCH":
+	# 	resp.message("Google it you lazy fuck " + WikiLookup(value))
 	return str(resp)
 
 def MWebLookup(s):
