@@ -22,8 +22,8 @@ def hello_monkey():
     value = " ".join(message_list[1:])
 
     if action.upper()=="DEFINE":
-    	# result = redirect("https://stormy-oasis-6293.herokuapp.com/define")
-    	result = "You asked to: " + action + "on " + value
+    	result = redirect("https://stormy-oasis-6293.herokuapp.com/define")
+    	# result = "You asked to: " + action + "on " + value
  
     resp = twilio.twiml.Response()
     resp.message(result)
