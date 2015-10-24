@@ -11,30 +11,27 @@ callers = {
 }
 @app.route("/", methods=['GET', 'POST'])
 def hello_monkey():
-    message = request.values.get('Body', None)
-    message_list = message.split(" ")
+	message = request.values.get('Body', None)
+	message_list = message.split(" ")
 
-    action = "".join(message_list[0])
-    value = " ".join(message_list[1:])
-	
+	action = "".join(message_list[0])
+	value = " ".join(message_list[1:])
 
 	resp = twilio.twiml.Response()
- 	if action == "Define":
- 		resp.message("fuck me with " + value)
- 	else:
- 		resp.message("fuck you" + value)
+	if action.upper() == "DEFINE":
+		resp.message("fuck me with " + value)
+	else:
+		resp.message("fuck you" + value)
+	return str(resp)
 
-    # resp.message("The definition of " + value + "is " + "fuck off")
- 
-    return str(resp)
-
-@app.route("/define", methods=['GET'])
-def define():
-	return
+# @app.route("/define", methods=['GET'])
+# def define():
+# 	return
  
 if __name__ == "__main__":
     app.run(debug=True)
 
+# resp.message("The definition of " + value + "is " + "fuck off")
 
 
 # def default():
