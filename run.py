@@ -28,7 +28,7 @@ def hello_monkey():
     	result = mWebLookup(value) 
     	# result = redirect("https://stormy-oasis-6293.herokuapp.com/define")
     	#result = "You asked to: " + action + "on " + value
-    elif action.upper()="SEARCH":
+    elif action.upper()=="SEARCH":
     	result = wikiLookup(value)
  
     resp = twilio.twiml.Response()
