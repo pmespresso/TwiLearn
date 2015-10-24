@@ -6,14 +6,6 @@ import re
  
 app = Flask(__name__)
  
-# Try adding your own number to this list!
-callers = {
-    "+14158675309": "Curious George",
-    "+14158675310": "Boots",
-    "+14158675311": "Virgil",
-    "+15109902644": "YJ",
-}
- 
 @app.route("/", methods=['GET', 'POST'])
 def hello_monkey():
     """Respond and greet the caller by name."""
