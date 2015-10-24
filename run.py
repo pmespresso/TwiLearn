@@ -11,7 +11,7 @@ callers = {
     "+15109902644": "YJ",
 }
  
-@app.route("/", methods=['POST'])
+@app.route("/", methods=['GET', 'POST'])
 def hello_monkey():
     """Respond and greet the caller by name."""
  
@@ -22,9 +22,9 @@ def hello_monkey():
     value = " ".join(message_list[1:])
 
     if action.upper()=="DEFINE":
-    	result = mWebLookup(value) 
+    	# result = mWebLookup(value) 
     	# result = redirect("https://stormy-oasis-6293.herokuapp.com/define")
-    	# result = "You asked to: " + action + "on " + value
+    	result = "You asked to: " + action + "on " + value
  
     resp = twilio.twiml.Response()
     resp.message(result)
