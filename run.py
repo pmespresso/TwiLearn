@@ -22,12 +22,14 @@ def hello_monkey():
     value = " ".join(message_list[1:])
 
     if action.upper()=="DEFINE":
-    	result = "You asked me to " + action + "with values: " + value
+    	result = redirect("https://stormy-oasis-6293.herokuapp.com/define")
  
     resp = twilio.twiml.Response()
     resp.message(result)
  
     return str(resp)
+
+
  
 if __name__ == "__main__":
     app.run(debug=True)
@@ -58,21 +60,21 @@ if __name__ == "__main__":
 
 
 
-# @app.route("/define", methods=['GET'])
-# def mWebLookup(s):
-# 	page = requests.get('http://www.merriam-webster.com/dictionary/' + s)
-# 	text = page.text.encode('ascii', 'ignore').decode('ascii')
-# 	a = text.find('ssens')
-# 	b = text.find('>', a)
-# 	c = text.find('</span>', b+3)
-# 	#print text[b+1:c]
-# 	text = re.sub('(<.*?>)|(&lt)|(&gt)', '', text[b+1:c])
-# 	text = re.sub('\s+', ' ', text);
-# 	text = text[text.find(":")+1:]
-# 	if(text.find('{ var') != -1):
-# 		return 'Err: ' +s + ' could not be found. Check your spelling and try again'
-# 	else:
-# 		return text
+@app.route("/define", methods=['GET'])
+def mWebLookup(s):
+	page = requests.get('http://www.merriam-webster.com/dictionary/' + s)
+	text = page.text.encode('ascii', 'ignore').decode('ascii')
+	a = text.find('ssens')
+	b = text.find('>', a)
+	c = text.find('</span>', b+3)
+	#print text[b+1:c]
+	text = re.sub('(<.*?>)|(&lt)|(&gt)', '', text[b+1:c])
+	text = re.sub('\s+', ' ', text);
+	text = text[text.find(":")+1:]
+	if(text.find('{ var') != -1):
+		return 'Err: ' +s + ' could not be found. Check your spelling and try again'
+	else:
+		return text
 
 # @app.route("/search", methods=['GET'])
 # def wikiLookup(s):
