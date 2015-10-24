@@ -15,14 +15,17 @@ callers = {
 def hello_monkey():
     """Respond and greet the caller by name."""
  
-    from_number = request.values.get('From', None)
-    if from_number in callers:
-        message = callers[from_number] + ", thanks for the message!"
-    else:
-        message = "Monkey, thanks for the message!"
+    message = request.values.get('Body', None)
+    message_list = message.split(" ")
+
+    action = "".join(message_list[0])
+    value = " ".join(message_list[1:])
+
+    if action.upper()=="DEFINE":
+    	result = "You asked me to " + action + "with values: " + value
  
     resp = twilio.twiml.Response()
-    resp.message(message)
+    resp.message(result)
  
     return str(resp)
  
