@@ -28,6 +28,8 @@ def hello_monkey():
     	result = mWebLookup(value) 
     	# result = redirect("https://stormy-oasis-6293.herokuapp.com/define")
     	#result = "You asked to: " + action + "on " + value
+    elif action.upper()="SEARCH":
+    	result = wikiLookup(value)
  
     resp = twilio.twiml.Response()
     resp.message(result)
@@ -82,20 +84,20 @@ def mWebLookup(s):
 		return text
 
 # @app.route("/search", methods=['GET'])
-# def wikiLookup(s):
-# 	page = requests.get('https://en.wikipedia.org/wiki/'+s)
-# 	text = page.text.encode('ascii', 'ignore').decode('ascii')
-# 	a = text.find('<p>')
-# 	b = text.find('>', a)
-# 	c = text.find('</p>', b+3)
-# 	#print text[b+1:c]
-# 	text = re.sub('(<.*?>)|(&lt)|(&gt)', '', text[b+1:c])
-# 	text = re.sub('\s+', ' ', text);
-# 	text = text[text.find(":")+1:]
-# 	if(text.find('{ var') != -1 or len(text) < 3):
-# 		return 'Err: ' +s + ' could not be found. Check your spelling and try again'
-# 	else:
-# 		return text
+def wikiLookup(s):
+	page = requests.get('https://en.wikipedia.org/wiki/'+s)
+	text = page.text.encode('ascii', 'ignore').decode('ascii')
+	a = text.find('<p>')
+	b = text.find('>', a)
+	c = text.find('</p>', b+3)
+	#print text[b+1:c]
+	text = re.sub('(<.*?>)|(&lt)|(&gt)', '', text[b+1:c])
+	text = re.sub('\s+', ' ', text);
+	text = text[text.find(":")+1:]
+	if(text.find('{ var') != -1 or len(text) < 3):
+		return 'Err: ' +s + ' could not be found. Check your spelling and try again'
+	else:
+		return text
 
 
 if __name__ == "__main__":
