@@ -11,22 +11,19 @@ callers = {
 }
 @app.route("/", methods=['GET', 'POST'])
 def hello_monkey():
-    """Respond and greet the caller by name."""
- 
     message = request.values.get('Body', None)
-    message_list = str(message.split(" "))
+    message_list = message.split(" ")
 
-    # action = message_list[0]
-    # value = message_list[1:]
- 
- 	# if action == "Define":
- 	# 	define(value)
- 	# else:
- 	# 	resp = twilio.twiml.Response()
- 	# 	resp.message("fuck you")
+    action = "".join(message_list[0])
+    value = " ".join(message_list[1:])
+	
 
-    resp = twilio.twiml.Response()
-    resp.message(message_list)
+	resp = twilio.twiml.Response()
+ 	if action == "Define":
+ 		resp.message("fuck me with " + value)
+ 	else:
+ 		resp.message("fuck you" + value)
+
     # resp.message("The definition of " + value + "is " + "fuck off")
  
     return str(resp)
