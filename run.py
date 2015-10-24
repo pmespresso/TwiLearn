@@ -49,7 +49,7 @@ def hello_monkey():
 
 	resp = twilio.twiml.Response()
 	if action.upper() == "DEFINE":
-		definition = redirect('/define')
+		definition = redirect('localhost:5000/define')
 		resp.message("The definition of " + value + "is " + definition)
 	# elif action.upper() == "SOLVE":
 	# 	resp.message("Solution is simple m8: " + value)
