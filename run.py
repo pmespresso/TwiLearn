@@ -19,11 +19,20 @@ def hello_monkey():
 	resp = twilio.twiml.Response()
 	if action.upper() == "DEFINE":
 		resp.message("The definition of " + value + "is " + action)
+	else:
+		resp.message("nah")
+	return str(resp)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
+
 	# elif action.upper() == "SOLVE":
 	# 	resp.message("Solution is simple m8: " + value)
 	# elif action.upper() == "SEARCH":
 	# 	resp.message("Google it you lazy fuck " + WikiLookup(value))
-	return str(resp)
+
 
 
 # @app.route("/define", methods=['GET'])
@@ -58,5 +67,4 @@ def hello_monkey():
 # 	else:
 # 		return text
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
