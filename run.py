@@ -1,15 +1,15 @@
 from flask import Flask, request, redirect
-import twilio.twiml
+from twilio.twiml import Response
  
 app = Flask(__name__)
  
 @app.route("/", methods=['GET', 'POST'])
 def sms_reply():
     # Retrieve the body of the text message.
-    message_body = request.form['Body']
+    message_body = request.values.get('Body', None)
 
     # Create a TwiML response object to respond to the text message.
-    resp = twilio.twiml.Response()
+	resp = Response()
     message_response = 'Message received! Manipulating memory now.'
 
     # Create a list of all words in the message body.
