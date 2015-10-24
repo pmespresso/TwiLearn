@@ -33,8 +33,8 @@ def hello_monkey():
 
 @app.route("/test")
 def test():
-	#response = mWebLookup("Life")
-	return "Hello" 
+	response = mWebLookup("Life")
+	return response 
 
 
 # @app.route("/", methods=['GET', 'POST'])
