@@ -1,12 +1,8 @@
 from flask import Flask, request, redirect
 import twilio.twiml
-from lxml import etree
-import requests
-import sys
-import re
-
+ 
 app = Flask(__name__)
-
+ 
 # Try adding your own number to this list!
 callers = {
     "+14158675309": "Curious George",
@@ -19,7 +15,7 @@ callers = {
 def hello_monkey():
     """Respond and greet the caller by name."""
  
-    from_number = flask.request.values.get('From', None)
+    from_number = request.values.get('From', None)
     if from_number in callers:
         message = callers[from_number] + ", thanks for the message!"
     else:
@@ -29,6 +25,9 @@ def hello_monkey():
     resp.message(message)
  
     return str(resp)
+ 
+if __name__ == "__main__":
+    app.run(debug=True)
 
 # @app.route("/", methods=['GET', 'POST'])
 # def hello_monkey():
@@ -45,8 +44,7 @@ def hello_monkey():
 # 		resp.message("nah")
 # 	return str(resp)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
 
 
 
