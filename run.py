@@ -1,15 +1,16 @@
 from flask import Flask, request, redirect
-from twilio.twiml import Response
+import twilio.twiml
  
 app = Flask(__name__)
  
 @app.route("/", methods=['GET', 'POST'])
 def default():
-	resp = Response()
+	resp = twilio.twiml.Response()
 	resp.message("hello there, what do you want from me?")
 
-	message = request.args.get("Body")
-	resp.message("was this your message? " + message)
+	message = request.args.get('Body')
+	resp.message("was this your message? ")
+	resp.message(message)
 	return str(resp)
 
 
