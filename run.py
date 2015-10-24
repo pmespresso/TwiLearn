@@ -8,6 +8,25 @@ import re
 
 app = Flask(__name__)
 
+@app.route("/", methods=['GET', 'POST'])
+def hello_monkey():
+	message = request.values.get('Body', None)
+	message_list = message.split(" ")
+
+	action = "".join(message_list[0])
+	value = " ".join(message_list[1:])
+
+	resp = twilio.twiml.Response()
+	if action.upper() == "DEFINE":
+		# definition = redirect('http://0.0.0.0:5000/define')
+		resp.message("The definition of " + value + "is " + action)
+	# elif action.upper() == "SOLVE":
+	# 	resp.message("Solution is simple m8: " + value)
+	# elif action.upper() == "SEARCH":
+	# 	resp.message("Google it you lazy fuck " + WikiLookup(value))
+	return str(resp)
+
+
 @app.route("/define", methods=['GET'])
 def mWebLookup(s):
 	page = requests.get('http://www.merriam-webster.com/dictionary/' + s)
@@ -39,25 +58,6 @@ def wikiLookup(s):
 		return 'Err: ' +s + ' could not be found. Check your spelling and try again'
 	else:
 		return text
-
-@app.route("/", methods=['GET', 'POST'])
-def hello_monkey():
-	message = request.values.get('Body', None)
-	message_list = message.split(" ")
-
-	action = "".join(message_list[0])
-	value = " ".join(message_list[1:])
-
-	resp = twilio.twiml.Response()
-	if action.upper() == "DEFINE":
-		# definition = redirect('http://0.0.0.0:5000/define')
-		resp.message("The definition of " + value + "is " + action)
-	# elif action.upper() == "SOLVE":
-	# 	resp.message("Solution is simple m8: " + value)
-	# elif action.upper() == "SEARCH":
-	# 	resp.message("Google it you lazy fuck " + WikiLookup(value))
-	return str(resp)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
