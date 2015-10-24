@@ -14,7 +14,7 @@ def hello_monkey():
     """Respond and greet the caller by name."""
  
     message = request.values.get('Body', None)
-    message_list = message.split(" ")
+    message_list = str(message.split(" "))
 
     # action = message_list[0]
     # value = message_list[1:]
