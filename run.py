@@ -5,6 +5,8 @@ import requests
 import sys
 import re
  
+
+@app.route("/define", methods=['GET'])
 def mWebLookup(s):
 	page = requests.get('http://www.merriam-webster.com/dictionary/' + s)
 	text = page.text.encode('ascii', 'ignore').decode('ascii')
@@ -48,7 +50,7 @@ def hello_monkey():
 
 	resp = twilio.twiml.Response()
 	if action.upper() == "DEFINE":
-		definition = mWebLookup(value)
+		definition = redirect('/define')
 		resp.message("The definition of " + value + "is " + definition)
 	# elif action.upper() == "SOLVE":
 	# 	resp.message("Solution is simple m8: " + value)
