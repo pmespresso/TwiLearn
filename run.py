@@ -34,7 +34,7 @@ def hello_monkey():
 @app.route("/test")
 def test():
 	response = mWebLookup("Life")
-	return response 
+	return "Hello" 
 
 
 # @app.route("/", methods=['GET', 'POST'])
