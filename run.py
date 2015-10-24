@@ -4,33 +4,39 @@ from twilio.twiml import Response
 app = Flask(__name__)
  
 @app.route("/", methods=['GET', 'POST'])
-def sms_reply():
-    # Retrieve the body of the text message.
-    message_body = request.values.get('Body', None)
-
-    # Create a TwiML response object to respond to the text message.
+def default():
 	resp = Response()
-    message_response = 'Message received! Manipulating memory now.'
+	resp.message("hello there")
 
-    # Create a list of all words in the message body.
-    message_list = message_body.split(' ')
- 	error_message = "Yo that shit too short nigguh"
+	return str(resp)
 
-    # Make sure the message is in the right format.
-    if not len(message_list) > 0:
-        message_response = error_message
-    else:
-        # The first word should be the desired action. i.e. Define:
-        action = message_list[0]
+
+# def sms_reply():
+#     # Retrieve the body of the text message.
+#     message_body = request.values.get('Body', None)
+
+#     # Create a TwiML response object to respond to the text message.
+# 	resp = Response()
+#     message_response = 'Message received! Manipulating memory now.'
+
+#     # Create a list of all words in the message body.
+#     message_list = message_body.split(' ')
+#  	error_message = "Yo that shit too short nigguh"
+
+#     # Make sure the message is in the right format.
+#     if not len(message_list) > 0:
+#         message_response = error_message
+#     else:
+#         # The first word should be the desired action. i.e. Define:
+#         action = message_list[0]
+
+#         # The second word should be the value to write to the action.
+#         value = message_list[1]
+
+#         message_response = action
  
-        # The second word should be the value to write to the action.
-        value = message_list[1]
-
-        message_response = action
- 
-    resp.message(message_response)
-    return str(resp)
-
+#     resp.message(message_response)
+#     return str(resp)
 
     # resp.message("Text Us With What You Want To Learn. Define: { word }")
 
