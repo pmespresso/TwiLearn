@@ -7,15 +7,15 @@ app = Flask(__name__)
 def sms_reply():
     # Retrieve the body of the text message.
     message_body = request.form['Body']
-    print message_body
- 
+
     # Create a TwiML response object to respond to the text message.
     resp = twilio.twiml.Response()
     message_response = 'Message received! Manipulating memory now.'
-     
+
     # Create a list of all words in the message body.
-    message_list = message_body.split(':')
- 
+    message_list = message_body.split(' ')
+ 	error_message = "Yo that shit too short nigguh"
+
     # Make sure the message is in the right format.
     if not len(message_list) > 0:
         message_response = error_message
