@@ -24,6 +24,7 @@ def mWebLookup(s):
 	else:
 		return text
 
+@app.route("/search", methods=['GET'])
 def wikiLookup(s):
 	page = requests.get('https://en.wikipedia.org/wiki/'+s)
 	text = page.text.encode('ascii', 'ignore').decode('ascii')
@@ -49,8 +50,8 @@ def hello_monkey():
 
 	resp = twilio.twiml.Response()
 	if action.upper() == "DEFINE":
-		definition = redirect('http://0.0.0.0:5000/define')
-		resp.message("The definition of " + value + "is " + definition)
+		# definition = redirect('http://0.0.0.0:5000/define')
+		resp.message("The definition of " + value + "is " + action)
 	# elif action.upper() == "SOLVE":
 	# 	resp.message("Solution is simple m8: " + value)
 	# elif action.upper() == "SEARCH":
