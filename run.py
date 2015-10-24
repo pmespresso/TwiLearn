@@ -6,8 +6,10 @@ app = Flask(__name__)
 @app.route("/", methods=['GET', 'POST'])
 def default():
 	resp = Response()
-	resp.message("hello there")
+	resp.message("hello there, what do you want from me?")
 
+	message = request.args.get("Body")
+	resp.message("was this your message? " + message)
 	return str(resp)
 
 
