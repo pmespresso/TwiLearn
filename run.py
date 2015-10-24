@@ -1,5 +1,8 @@
 from flask import Flask, request, redirect
 import twilio.twiml
+import requests
+#import sys
+import re
  
 app = Flask(__name__)
  
@@ -63,9 +66,6 @@ def test():
 
 def mWebLookup(s):
 	#from lxml import etree
-	import requests
-	import sys
-	import re
 
 	page = requests.get('http://www.merriam-webster.com/dictionary/' + s)
 	text = page.text.encode('ascii', 'ignore').decode('ascii')
