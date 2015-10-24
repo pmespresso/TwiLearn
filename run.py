@@ -4,7 +4,9 @@ from lxml import etree
 import requests
 import sys
 import re
- 
+
+
+app = Flask(__name__)
 
 @app.route("/define", methods=['GET'])
 def mWebLookup(s):
@@ -36,9 +38,6 @@ def wikiLookup(s):
 		return 'Err: ' +s + ' could not be found. Check your spelling and try again'
 	else:
 		return text
-
-
-app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def hello_monkey():
