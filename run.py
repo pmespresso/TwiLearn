@@ -19,75 +19,47 @@ def hello_monkey():
 
 	resp = twilio.twiml.Response()
 	if action.upper() == "DEFINE":
-		resp.message("fuck me with " + value)
-	else:
-		resp.message("fuck you" + value)
+		definition = MWebLookup(value)
+		resp.message("The definition of " + value + "is " + definition)
+	# elif action.upper() == "SOLVE":
+	# 	resp.message("Solution is simple m8: " + value)
+	elif action.upper() == "SEARCH":
+		resp.message("Google it you lazy fuck " + WikiLookup(value))
 	return str(resp)
 
-# @app.route("/define", methods=['GET'])
-# def define():
-# 	return
- 
-if __name__ == "__main__":
-    app.run(debug=True)
+def MWebLookup(s):
+	from lxml import etree
+	import requests
+	import sys
+	import re
+	page = requests.get('http://www.merriam-webster.com/dictionary/' + s)
+	text = page.text.encode('ascii', 'ignore').decode('ascii')
+	a = text.find('ssens')
+	b = text.find('>', a)
+	c = text.find('</span>', b+3)
+	#print text[b+1:c]
+	text = re.sub('(<.*?>)|(&lt)|(&gt)', '', text[b+1:c])
+	text = re.sub('\s+', ' ', text);
+	text = text[text.find(":")+1:]
+	if(text.find('{ var') != -1):
+		return 'Err: ' +s + ' could not be found. Check your spelling and try again'
+	else:
+		return text
 
-# resp.message("The definition of " + value + "is " + "fuck off")
-
-
-# def default():
-# 	resp = twilio.twiml.Response()
-# 	resp.message("hello there, what do you want from me?")
-
-# 	message = request.args.get('Body')
-# 	resp.message("was this your message? ")
-# 	resp.message(message)
-# 	return str(resp)
-
-
-# def sms_reply():
-#     # Retrieve the body of the text message.
-#     message_body = request.values.get('Body', None)
-
-#     # Create a TwiML response object to respond to the text message.
-# 	resp = Response()
-#     message_response = 'Message received! Manipulating memory now.'
-
-#     # Create a list of all words in the message body.
-#     message_list = message_body.split(' ')
-#  	error_message = "Yo that shit too short nigguh"
-
-#     # Make sure the message is in the right format.
-#     if not len(message_list) > 0:
-#         message_response = error_message
-#     else:
-#         # The first word should be the desired action. i.e. Define:
-#         action = message_list[0]
-
-#         # The second word should be the value to write to the action.
-#         value = message_list[1]
-
-#         message_response = action
- 
-#     resp.message(message_response)
-#     return str(resp)
-
-    # resp.message("Text Us With What You Want To Learn. Define: { word }")
-
-    # with resp.gather(action="/gather") as g:
-    # 	g.sms("Here you go: " )
-    # resp.pause()
-    # resp.redirect("/")
-    # return str(resp)
-
-
-# @app.route("/gather", methods=['GET', 'POST'])
-# def gather():
-# 	resp = twilio.twiml.Response()
-
-# 	body = request.form["Body"]
-
-# 	resp.message(body)
-# 	return str(body)
+def WikiLookup(s):
+	page = requests.get('https://en.wikipedia.org/wiki/'+s)
+	text = page.text.encode('ascii', 'ignore').decode('ascii')
+	a = text.find('<p>')
+	b = text.find('>', a)
+	c = text.find('</p>', b+3)
+	#print text[b+1:c]
+	text = re.sub('(<.*?>)|(&lt)|(&gt)', '', text[b+1:c])
+	text = re.sub('\s+', ' ', text);
+	text = text[text.find(":")+1:]
+	if(text.find('{ var') != -1 or len(text) < 3):
+		return 'Err: ' +s + ' could not be found. Check your spelling and try again'
+	else:
+		return text
 
 if __name__ == "__main__":
     app.run(debug=True)
