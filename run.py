@@ -14,12 +14,25 @@ def hello_monkey():
     """Respond and greet the caller by name."""
  
     message = request.values.get('Body', None)
+    message_list = message.split(" ")
 
+    action = message_list[0]
+    value = message_list[1:]
  
+ 	# if action == "Define":
+ 	# 	define(value)
+ 	# else:
+ 	# 	resp = twilio.twiml.Response()
+ 	# 	resp.message("fuck you")
+
     resp = twilio.twiml.Response()
-    resp.message(message)
+    resp.message("The definition of " + value + "is " + "fuck off")
  
     return str(resp)
+
+@app.route("/define", methods=['GET'])
+def define():
+	return
  
 if __name__ == "__main__":
     app.run(debug=True)
